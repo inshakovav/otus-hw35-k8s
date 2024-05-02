@@ -21,6 +21,66 @@ spec:
         env: prod
     spec:
       containers:
+        - name: kuber-delivery-30
+          image: alxinsh/docker-java-hw30-delivery:1.0.5
+          ports:
+            - containerPort: 8084
+          env:
+            - name: DB_USER
+              valueFrom: # в место занчений ссылки на Secret
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: password
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 2000Mi
+
+        - name: kuber-warehouse-30
+          image: alxinsh/docker-java-hw30-warehouse:1.0.5
+          ports:
+            - containerPort: 8083
+          env:
+            - name: DB_USER
+              valueFrom: # в место занчений ссылки на Secret
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: password
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 2000Mi
+
+        - name: kuber-payment-30
+          image: alxinsh/docker-java-hw30-payment:1.0.5
+          ports:
+            - containerPort: 8082
+          env:
+            - name: DB_USER
+              valueFrom: # в место занчений ссылки на Secret
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret-30
+                  key: password
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 2000Mi
+
         - name: kuber-order-30
           image: alxinsh/docker-java-hw30-order:1.0.5
           ports:
