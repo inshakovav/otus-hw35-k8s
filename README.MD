@@ -5,7 +5,9 @@ warehouse
 delivery
 
 Placing an order is carried out in the following sequence: order > payment > warehouse > delivery.
-Saga pattern used
+Saga pattern used.
+Kafka is used for exchange between services.
+Each service has a database in which the state is stored.
 
 ![sequence.drawio.png](..%2Fsequence.drawio.png)
 
