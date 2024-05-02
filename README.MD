@@ -7,7 +7,7 @@ delivery
 Placing an order is carried out in the following sequence: order > payment > warehouse > delivery.
 Saga pattern used
 
-!!! image
+![sequence.drawio.png](..%2Fsequence.drawio.png)
 
 To emulate runtime errors, the application processes part of the request correctly and the other part with errors.
 The ordering application will fulfill all requests without errors.
