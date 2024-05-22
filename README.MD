@@ -35,7 +35,7 @@ kubectl port-forward service/my-kafka  9092:9092 # doesn't work
 
 ### Deploy service into K8s
 ```bash
-kubectl apply -f ./k8s/
+kubectl apply -f .
 ```
 
 ### Enable Minikube tunnel
@@ -45,11 +45,13 @@ minikube tunnel
 
 ### Test applications
 #### To execute order send POST request
+Проверка идемпотентности. Если товар похожий уже создан, то данные в БД НЕ сохраняются.
+Дубли ищутся по productId, productQuantity, BookingAt - 5 минут (через 5 минут можно создать заказ на туже позицию).
 ```bash
 curl -H 'Content-Type: application/json' \
--d '{ "orderDescription":"Order description", "productId":"123", "productPrice":"5.1", "productQuantity":"2.0", "deliveryAddress":"г.Москва, ул. Тверская, д.12"}' \
+-d '{ "bookingAt":"2024-04-28T02:55:28.183+00:00", "orderDescription":"Order description", "productId":"123", "productPrice":"5.1", "productQuantity":"2.0", "deliveryAddress":"г.Москва, ул. Тверская, д.12"}' \
 -X POST \
-http://arch.homework/order
+http://arch.homework/order | json_pp
 ```
 
 #### Get all Orders
@@ -58,7 +60,7 @@ curl http://arch.homework/order | json_pp
 ```
 
 ### Cleanup
-kubectl delete -f ./k8s/
+kubectl delete -f .
 helm delete my-db
 helm delete my-kafka
 kubectl delete pvc data-my-db-postgresql-0

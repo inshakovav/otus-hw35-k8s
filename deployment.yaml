@@ -82,7 +82,7 @@ spec:
               memory: 2000Mi
 
         - name: kuber-order-30
-          image: alxinsh/docker-java-hw30-order:1.0.5
+          image: alxinsh/docker-java-hw30-order:1.0.6
           ports:
             - containerPort: 8081
           env:
