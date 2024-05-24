@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kuber-ingress-30
+  name: kuber-ingress-35
 spec:
   ingressClassName: nginx
   rules:
@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: kuber-service-30
+            name: kuber-service-35
             port:
               number: 80

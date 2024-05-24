@@ -1,6 +1,6 @@
 global:
   postgresql:
     auth:
-      database: db_otus_30
+      database: db_otus_35
       username: myuser
       password: mypassword

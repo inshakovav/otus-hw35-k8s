@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kuber-dp-30
+  name: kuber-dp-35
   labels:
-    app: kuber-dp-30
+    app: kuber-dp-35
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -21,80 +21,60 @@ spec:
         env: prod
     spec:
       containers:
-        - name: kuber-delivery-30
-          image: alxinsh/docker-java-hw30-delivery:1.0.5
-          ports:
-            - containerPort: 8084
-          env:
-            - name: DB_USER
-              valueFrom: # в место занчений ссылки на Secret
-                secretKeyRef:
-                  name: kuber-secret-30
-                  key: username
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: kuber-secret-30
-                  key: password
-          resources:
-            limits:
-              cpu: 0.5
-              memory: 2000Mi
-
-        - name: kuber-warehouse-30
-          image: alxinsh/docker-java-hw30-warehouse:1.0.5
+        - name: kuber-notification-35
+          image: alxinsh/docker-java-hw35-notification:1.0.2
           ports:
             - containerPort: 8083
           env:
             - name: DB_USER
               valueFrom: # в место занчений ссылки на Secret
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: username
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: password
           resources:
             limits:
               cpu: 0.5
               memory: 2000Mi
 
-        - name: kuber-payment-30
-          image: alxinsh/docker-java-hw30-payment:1.0.5
+        - name: kuber-payment-35
+          image: alxinsh/docker-java-hw35-billing:1.0.2
           ports:
             - containerPort: 8082
           env:
             - name: DB_USER
               valueFrom: # в место занчений ссылки на Secret
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: username
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: password
           resources:
             limits:
               cpu: 0.5
               memory: 2000Mi
 
-        - name: kuber-order-30
-          image: alxinsh/docker-java-hw30-order:1.0.6
+        - name: kuber-order-35
+          image: alxinsh/docker-java-hw35-order:1.0.2
           ports:
             - containerPort: 8081
           env:
             - name: DB_USER
               valueFrom: # в место занчений ссылки на Secret
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: username
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: kuber-secret-30
+                  name: kuber-secret-35
                   key: password
           resources:
             limits:
