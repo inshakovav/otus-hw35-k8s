@@ -12,20 +12,20 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: kuber-service-35
+              name: kuber-dp-order-35
               port:
                 number: 80
         - path: /account
           pathType: Prefix
           backend:
             service:
-              name: kuber-service-35
+              name: kuber-dp-billing-35
               port:
                 number: 80
         - path: /notification
           pathType: Prefix
           backend:
             service:
-              name: kuber-service-35
+              name: kuber-dp-notification-35
               port:
                 number: 80

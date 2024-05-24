@@ -22,9 +22,9 @@ spec:
     spec:
       containers:
         - name: kuber-order-35
-          image: alxinsh/docker-java-hw35-order:1.0.3
+          image: alxinsh/docker-java-hw35-order:1.0.4
           ports:
-            - containerPort: 8081
+            - containerPort: 80
           env:
             - name: DB_USER
               valueFrom: # в место занчений ссылки на Secret

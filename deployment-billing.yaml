@@ -22,9 +22,9 @@ spec:
     spec:
       containers:
         - name: kuber-billing-35
-          image: alxinsh/docker-java-hw35-billing:1.0.4
+          image: alxinsh/docker-java-hw35-billing:1.0.5
           ports:
-            - containerPort: 8082
+            - containerPort: 80
           env:
             - name: DB_USER
               valueFrom: # в место занчений ссылки на Secret

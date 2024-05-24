@@ -19,15 +19,63 @@ kubectl port-forward service/my-kafka  9092:9092 # doesn't work
 
 ### Deploy service into K8s
 ```bash
-kubectl apply -f .
+c
 ```
 
 ### Enable Minikube tunnel
 ```bash
-minikube tunnel
+kubectl get svc # Use svc list
+kubectl expose deploy kuber-dp-billing-35
+kubectl expose deploy kuber-dp-order-35
+kubectl expose deploy kuber-dp-notification-35
 ```
 
 ### Test applications
+
+#### Add an Account
+```bash
+curl -H 'Content-Type: application/json' \
+-d '{ "name":"Василий Пупкин"}' \
+-X POST \
+arch.homework/account | json_pp
+```
+
+```bash
+curl arch.homework/account | json_pp
+```
+
+#### Topup
+```bash
+curl -H 'Content-Type: application/json' \
+-d '{ "amount":"20.2"}' \
+-X POST \
+arch.homework/account/top-up/1 | json_pp
+```
+
+```bash
+curl http://arch.homework/account | json_pp
+```
+
+```bash
+curl arch.homework/account | json_pp
+```
+
+### Post correct order
+```bash
+curl -H 'Content-Type: application/json' \
+-d '{ "accountId":"1", "price":"1.1", "bookingAt":"2024-04-27T02:55:28.183+00:00" }' \
+-X POST \
+http://arch.homework/order | json_pp
+```
+
+### Post correct order with high price
+```bash
+curl -H 'Content-Type: application/json' \
+-d '{ "accountId":"1", "price":"31.1", "bookingAt":"2024-04-27T02:55:28.183+00:00" }' \
+-X POST \
+http://arch.homework/order | json_pp
+```
+
 #### To execute order send POST request
 Проверка идемпотентности. Если товар похожий уже создан, то данные в БД НЕ сохраняются.
 Дубли ищутся по accountId, price, BookingAt - 5 минут (через 5 минут можно создать заказ на туже позицию).
@@ -44,7 +92,7 @@ curl http://arch.homework/order | json_pp
 ```
 
 ```bash
-curl http://arch.homework/order | json_pp
+curl http://arch.homework/notification | json_pp
 ```
 
 ### Cleanup
