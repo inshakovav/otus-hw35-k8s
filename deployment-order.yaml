@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuber-dp-order-35
+  labels:
+    app: kuber-dp-order-35
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1 # шаг изменения по 1ому. Один гасится, один запускается
+      maxUnavailable: 1 # мах число Подов недоступных, при обновлении
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+        - name: kuber-order-35
+          image: alxinsh/docker-java-hw35-order:1.0.3
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DB_USER
+              valueFrom: # в место занчений ссылки на Secret
+                secretKeyRef:
+                  name: kuber-secret-35
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret-35
+                  key: password
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 2000Mi

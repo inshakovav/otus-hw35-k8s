@@ -8,10 +8,24 @@ spec:
   - host: arch.homework
     http:
       paths:
-      - path: /order
-        pathType: Prefix
-        backend:
-          service:
-            name: kuber-service-35
-            port:
-              number: 80
+        - path: /order
+          pathType: Prefix
+          backend:
+            service:
+              name: kuber-service-35
+              port:
+                number: 80
+        - path: /account
+          pathType: Prefix
+          backend:
+            service:
+              name: kuber-service-35
+              port:
+                number: 80
+        - path: /notification
+          pathType: Prefix
+          backend:
+            service:
+              name: kuber-service-35
+              port:
+                number: 80

@@ -43,8 +43,13 @@ http://arch.homework/order | json_pp
 curl http://arch.homework/order | json_pp
 ```
 
+```bash
+curl http://arch.homework/order | json_pp
+```
+
 ### Cleanup
 kubectl delete -f .
 helm delete my-db
 helm delete my-kafka
 kubectl delete pvc data-my-db-postgresql-0
+kubectl delete pv ???
